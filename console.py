@@ -14,19 +14,21 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+import re
 
 
 class HBNBCommand(cmd.Cmd):
     """ this class inherits Cmd class and acts like a shell
        uniquely for our project where it take care instances"""
 
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
     existingClasses = {'BaseModel': BaseModel, 'User': User, 'City': City,
                        'Place': Place, 'Amenity': Amenity, 'Review': Review,
                        'State': State}
 
     def do_quit(self, arg):
         """ allows the exit of our program on quit"""
+        print()
         exit()
 
     def do_EOF(self, arg):
@@ -96,13 +98,14 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Prints all string representation of all instances
            based or not on the class name"""
+        arg = arg.split()
         if len(arg) == 0:
             print([str(value) for value in storage.all().values()])
-        elif arg not in self.existingClasses:
+        elif arg[0] not in self.existingClasses or len(arg) > 1:
             print("** class doesn't exist **")
         else:
             new = [str(value) for key, value in storage.all().items()
-                   if key.split(".")[0] == arg]
+                   if key.split(".")[0] == arg[0]]
             print(new)
 
     def do_update(self, arg):
@@ -131,6 +134,46 @@ class HBNBCommand(cmd.Cmd):
                     setattr(store[key], arg[2], arg[3][1:-1])
                     storage.save()
         return
+
+    def do_count(self, arg):
+        """a class that counts number of objects stored"""
+        arg = arg.split()
+        if len(arg) == 0:
+            print("** class name missing **")
+            return
+        if arg[0] not in self.existingClasses:
+            print("** class doesn't exist **")
+        else:
+            i = 0
+            for value in storage.all().values():
+                if value.__class__.__name__ == arg[0]:
+                    i += 1
+            print(i)
+
+    def default(self, arg):
+        """ handles <class name>.func() commands"""
+        if arg is None:
+            return
+
+        command_p = "^([A-Za-z]+)\.([a-z]+)\(([^(]*)\)"  # noqa: regex pattern
+        matched_p = re.match(command_p, arg)
+        if not matched_p:
+            super().default(arg)
+            return
+        cls, func, arguments = matched_p.groups()
+        arguments = " ".join(arguments.split(','))
+        arguments = arguments[1:-1]
+        args = " ".join([cls] + [arguments])
+        if func == 'all':
+            return self.do_all(args)
+        if func == 'count':
+            return self.do_count(args)
+        if func == 'show':
+            return self.do_show(args)
+        if func == 'destroy':
+            return self.do_destroy(args)
+        if func == 'update':
+            return self.do_update(args)
 
 
 if __name__ == '__main__':
