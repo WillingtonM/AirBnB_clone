@@ -23,10 +23,10 @@ from models.city import City
 class TestFileStorage_instantiation(unittest.TestCase):
     """Testing the instantiation of FileStorage class."""
 
-    def test_FileStorage_instantiation_no_args(self):
+    def test_FileStorage_init_no_args(self):
         self.assertEqual(type(FileStorage()), FileStorage)
 
-    def test_FileStorage_instantiation_with_arg(self):
+    def test_FileStorage_init_with_arg(self):
         with self.assertRaises(TypeError):
             FileStorage(None)
 

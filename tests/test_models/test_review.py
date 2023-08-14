@@ -23,45 +23,45 @@ class TestReview_instantiation(unittest.TestCase):
     def test_new_instance_stored_in_objects(self):
         self.assertIn(Review(), models.storage.all().values())
 
-    def test_id_is_public_str(self):
+    def test_id_ispublic_str(self):
         self.assertEqual(str, type(Review().id))
 
-    def test_created_at_is_public_datetime(self):
+    def test_created_at_ispublic_datetime(self):
         self.assertEqual(datetime, type(Review().created_at))
 
-    def test_updated_at_is_public_datetime(self):
+    def test_updated_at_ispublic_datetime(self):
         self.assertEqual(datetime, type(Review().updated_at))
 
-    def test_place_id_is_public_class_attribute(self):
+    def test_place_id_ispublic_class_attribute(self):
         rvw = Review()
         self.assertEqual(str, type(Review.place_id))
         self.assertIn("place_id", dir(rvw))
         self.assertNotIn("place_id", rvw.__dict__)
 
-    def test_user_id_is_public_class_attribute(self):
+    def test_user_id_ispublic_class_attribute(self):
         rvw = Review()
         self.assertEqual(str, type(Review.user_id))
         self.assertIn("user_id", dir(rvw))
         self.assertNotIn("user_id", rvw.__dict__)
 
-    def test_text_is_public_class_attribute(self):
+    def test_text_ispublic_class_attribute(self):
         rvw = Review()
         self.assertEqual(str, type(Review.text))
         self.assertIn("text", dir(rvw))
         self.assertNotIn("text", rvw.__dict__)
 
-    def test_two_reviews_unique_ids(self):
+    def test_2_reviews_unique_ids(self):
         rvw_1 = Review()
         rvw_2 = Review()
         self.assertNotEqual(rvw_1.id, rvw_2.id)
 
-    def test_two_reviews_different_created_at(self):
+    def test_2_reviews_different_created_at(self):
         rvw_1 = Review()
         sleep(0.05)
         rvw_2 = Review()
         self.assertLess(rvw_1.created_at, rvw_2.created_at)
 
-    def test_two_reviews_different_updated_at(self):
+    def test_2_reviews_different_updated_at(self):
         rvw_1 = Review()
         sleep(0.05)
         rvw_2 = Review()
@@ -83,7 +83,7 @@ class TestReview_instantiation(unittest.TestCase):
         rvw = Review(None)
         self.assertNotIn(None, rvw.__dict__.values())
 
-    def test_instantiation_with_kwargs(self):
+    def test_init_with_kwargs(self):
         date_t = datetime.today()
         date_t_iso = date_t.isoformat()
         rvw = Review(id="345", created_at=date_t_iso, updated_at=date_t_iso)
@@ -91,7 +91,7 @@ class TestReview_instantiation(unittest.TestCase):
         self.assertEqual(rvw.created_at, date_t)
         self.assertEqual(rvw.updated_at, date_t)
 
-    def test_instantiation_with_None_kwargs(self):
+    def test_init_with_None_kwargs(self):
         with self.assertRaises(TypeError):
             Review(id=None, created_at=None, updated_at=None)
 
@@ -116,14 +116,14 @@ class TestReview_save(unittest.TestCase):
         except IOError:
             pass
 
-    def test_one_save(self):
+    def test_1_save(self):
         rvw = Review()
         sleep(0.05)
         first_updated_at = rvw.updated_at
         rvw.save()
         self.assertLess(first_updated_at, rvw.updated_at)
 
-    def test_two_saves(self):
+    def test_2_saves(self):
         rvw = Review()
         sleep(0.05)
         first_updated_at = rvw.updated_at
@@ -150,31 +150,31 @@ class TestReview_save(unittest.TestCase):
 class TestReview_to_dict(unittest.TestCase):
     """Testing to_dict method of Review class."""
 
-    def test_to_dict_type(self):
+    def test_to_dicttype(self):
         self.assertTrue(dict, type(Review().to_dict()))
 
-    def test_to_dict_contains_correct_keys(self):
+    def test_todict_contains_correct_keys(self):
         rvw = Review()
         self.assertIn("id", rvw.to_dict())
         self.assertIn("created_at", rvw.to_dict())
         self.assertIn("updated_at", rvw.to_dict())
         self.assertIn("__class__", rvw.to_dict())
 
-    def test_to_dict_contains_added_attributes(self):
+    def test_todict_contains_added_attrb(self):
         rvw = Review()
         rvw.middle_name = "ALXAfrica"
         rvw.my_number = 98
         self.assertEqual("ALXAfrica", rvw.middle_name)
         self.assertIn("my_number", rvw.to_dict())
 
-    def test_to_dict_datetime_attributes_are_strs(self):
+    def test_todict_datetime_attrb_are_strs(self):
         rvw = Review()
         rv_dict = rvw.to_dict()
         self.assertEqual(str, type(rv_dict["id"]))
         self.assertEqual(str, type(rv_dict["created_at"]))
         self.assertEqual(str, type(rv_dict["updated_at"]))
 
-    def test_to_dict_output(self):
+    def test_todict_output(self):
         date_t = datetime.today()
         rvw = Review()
         rvw.id = "123456"
@@ -187,11 +187,11 @@ class TestReview_to_dict(unittest.TestCase):
         }
         self.assertDictEqual(rvw.to_dict(), tdict)
 
-    def test_contrast_to_dict_dunder_dict(self):
+    def test_contrast_todict_dunder_dict(self):
         rvw = Review()
         self.assertNotEqual(rvw.to_dict(), rvw.__dict__)
 
-    def test_to_dict_with_arg(self):
+    def test_todict_with_arg(self):
         rvw = Review()
         with self.assertRaises(TypeError):
             rvw.to_dict(None)
