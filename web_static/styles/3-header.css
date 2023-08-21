@@ -1,0 +1,19 @@
+header {
+    color: white;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    position: relative;
+}
+
+.logo {
+    /* Background pattern | Toptal Subtle Patterns */
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    top: 50%;
+    position: absolute;
+    margin-left: 20px;
+    margin-top: -30px;
+    height: 60px;
+    width: 142px;
+}

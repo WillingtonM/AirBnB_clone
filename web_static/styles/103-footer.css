@@ -1,0 +1,16 @@
+footer {
+    text-align: center;
+    position: fixed;
+    background: white;
+    border-top: 1px solid #CCCCCC;
+    width: 100%;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    bottom: 0;
+}
+
+@media only screen and (min-width : 150px) and (max-width : 700px) {
+    footer {
+        font-size: 3.5ch;
+    }
+}

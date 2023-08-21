@@ -1,0 +1,138 @@
+.filters {
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid #DDDDDD;
+    width: 100%;
+    height: 70px;
+}
+
+.popover {
+    display: none;
+    background-color: #FAFAFA;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    width: 100%;
+    padding-bottom: 10%;
+    padding-top: 10%;
+    padding-left: 0;
+}
+
+.popover h2 {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 16px;
+}
+
+.popover li {
+    list-style: none;
+}
+
+.popover li {
+    padding: 0 10%;
+    margin: .5rem 0;
+}
+
+.popover .pop {
+    padding: 10%;
+}
+
+.popover .popi {
+    padding: 10% auto;
+}
+
+.popover li ul {
+    padding-left: 0;
+}
+
+.locations:hover .popover {
+    display: block;
+}
+
+.amenities:hover .popover {
+    display: block;
+}
+
+button {
+    background-color: #FF5A5F;
+    position: absolute;
+    color: #FFFFFF;
+    font-size: 18px;
+    top: 50%;
+    right: 30px;
+    margin-top: -24px;
+    width: 20%;
+    height: 48px;
+    border-radius: 4px;
+    border: none;
+    overflow: auto;
+}
+
+button:hover {
+    opacity: 90%;
+}
+
+.filters .amenities {
+    position: absolute;
+    margin-left: 25%;
+    width: 25%;
+    height: 100%;
+}
+
+.locations {
+    border-right: 1px solid #DDDDDD;
+    position: absolute;
+    width: 25%;
+    height: 100%;
+}
+
+.amenities h4, .locations h4 {
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-left: 25%;
+    font-weight: 400;
+    font-size: 14px;
+    color: inherit;
+}
+
+.amenities h3, .locations h3 {
+    box-sizing: border-box;
+    color: inherit;
+    font-weight: 600;
+    margin-left: 25%;
+    margin-bottom: 0;
+}
+
+@media only screen and (min-width : 150px) and (max-width : 700px) {
+    .filters {
+        width: 95%;
+        margin: 0 auto;
+        height: 15ch;
+    }
+
+    button {
+        font-size: 1.5em;
+    }
+
+    .amenities h4, .locations h4 {
+        margin-left: 10vw;
+        font-size: 1.5em;
+    }
+    .amenities h3, .locations h3 {
+        margin-left: 10vw;
+        font-size: 1.5em;
+    }
+
+    
+    .popover li {
+        font-size: 1.4rem;
+    }
+
+    .popover h2 {
+        font-size: 1.5em;
+    }
+}
+
+/*
+
+*/

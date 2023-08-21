@@ -1,0 +1,30 @@
+header {
+    display: flex;
+    position: relative;
+    color: white;
+    border-bottom: 1px solid #CCCCCC;
+    height: 70px;
+    width: 100%;
+    flex: 1 1 100%;
+}
+
+.logo {
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 142px;
+    height: 60px;
+    top: 50%;
+    margin-left: 20px;
+    margin-top: -30px;
+}
+
+@media only screen and (min-width : 150px) and (max-width : 700px) {
+    header {
+        width: 1000px;
+    }
+
+    .logo {
+        background-size: cover;
+    }
+}
